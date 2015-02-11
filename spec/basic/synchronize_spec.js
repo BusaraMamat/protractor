@@ -2,7 +2,7 @@ var util = require('util');
 
 describe('synchronizing with slow pages', function() {
   beforeEach(function() {
-    browser.get('index.html#/async');
+    browser.driver.get('http://localhost:8081/index.html#/async');
   });
 
   it('waits for http calls', function() {

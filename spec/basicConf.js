@@ -2,7 +2,7 @@ var env = require('./environment.js');
 
 // The main suite of Protractor tests.
 exports.config = {
-  seleniumAddress: env.seleniumAddress,
+  seleniumAddress: 'http://localhost:8111',
 
   framework: 'jasmine2',
 
