@@ -7,6 +7,16 @@ describe('no protractor at all', function() {
 });
 
 describe('protractor library', function() {
+  fit('should reach into the shadow dom', function() {
+    browser.driver.get('http://localhost:8081/index.html');
+    browser.driver.sleep(2000);
+    browser.driver.findElement(protractor.By.css('* /deep/ #olderHeading')).getText().then(function(text) {
+      expect(text).toEqual('Hi');
+    });
+    // expect(element(by.css('* /deep/ #olderHeading')).isPresent()).toBe(true);
+    // expect(element(by.css('* /deep/ #olderHeading')).getText()).toEqual('Hi');
+  });
+
   it('should expose the correct global variables', function() {
     expect(protractor).toBeDefined();
     expect(browser).toBeDefined();
