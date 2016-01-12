@@ -6,6 +6,8 @@ function RepeaterCtrl($scope) {
     {initial: 'Th', name: 'Thursday'},
     {initial: 'F', name: 'Friday'}
   ];
+
+  $scope.nodes = ['a', 'b', 'c'];
 }
 
 RepeaterCtrl.$inject = ['$scope'];
