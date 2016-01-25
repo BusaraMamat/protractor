@@ -76,7 +76,7 @@ depend on one another. So, instead of creating a user in one of your tests and
 expect that record to be there for all other subsequent tests, you could harvest 
 the power of jasmine's beforeAll (since Jasmine 2.1) to create the user.
 
-```javascript
+```javascript {.bad}
 /* avoid */
 
 it('should create user', function() {
@@ -104,7 +104,7 @@ it('should update user', function() {
 });
 ```
 
-```javascript
+```javascript {.good}
 /* recommended */
 
 describe('when the user Teddy B is created', function(){
@@ -170,7 +170,7 @@ describe('when the user Teddy B is created', function(){
   a lot of maintenance
 * xpath expressions are unreadable and very hard to debug
 
-```javascript
+```javascript {.bad}
 /* avoid */
 
 var elem = element(by.xpath('/*/p[2]/b[2]/following-sibling::node()' +
@@ -198,12 +198,14 @@ var elem = element(by.xpath('/*/p[2]/b[2]/following-sibling::node()' +
 </div>
 ```
 
-```js
+```js {.bad}
 /* avoid */
 
 var nameElement = element.all(by.css('.red li')).get(0);
 var personName = element(by.css('.details .personal input'));
+```
 
+```js {.good}
 /* recommended */
 
 var nameElement = element(by.binding('color.name'));
@@ -244,7 +246,7 @@ to update the page object.
 * They can be reused across multiple tests
 * Decouple the test logic from implementation details
 
-```javascript
+```javascript {.bad}
 /* avoid */
 
 /* question-spec.js */
@@ -261,7 +263,7 @@ describe('Question page', function() {
 });
 ```
 
-```javascript
+```javascript {.good}
 /* recommended */
 
 /* question-spec.js */
@@ -305,7 +307,7 @@ module.exports = QuestionPage;
 * Each page object should declare a single class. You only need to export one
   class.
 
-```js
+```js {.bad}
 /* avoid */
 
 var UserProfilePage = function() {};
@@ -315,7 +317,7 @@ module.exports = UserPropertiesPage;
 module.exports = UserSettingsPage;
 ```
 
-```javascript
+```javascript {.good}
 /* recommended */
 
 /** @constructor */
@@ -513,7 +515,7 @@ describe('protractor website', function() {
 * Makes the folder structure more readable
 * Clearly separates e2e tests from unit tests
 
-```
+``` {.bad}
 /* avoid */
 
 |-- project-folder
@@ -540,7 +542,9 @@ describe('protractor website', function() {
         profile-spec.js
         contacts-page.js
         contacts-spec.js
+```
 
+``` {.good}
 /* recommended */
 
 |-- project-folder
