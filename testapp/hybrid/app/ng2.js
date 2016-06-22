@@ -24,6 +24,7 @@ System.register(['@angular/core', './upgrader'], function(exports_1, context_1) 
             Ng2Component = (function () {
                 function Ng2Component() {
                     var _this = this;
+                    this.fido = 'Fido';
                     this.callCount = 0;
                     this.clickButton = function () {
                         setTimeout(function () {

@@ -10,7 +10,7 @@ function ctrl($scope, $timeout) {
 
 export function ng1() {
   return {
-    scope: {},
+    scope: {puppies: '@'},
     templateUrl: './html/ng1.html',
     controller: ctrl,
     controllerAs: 'ctrl'

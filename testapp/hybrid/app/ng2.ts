@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ng1} from './ng1'
 import {adapter} from './upgrader';
 
 @Component({
@@ -8,6 +7,7 @@ import {adapter} from './upgrader';
   directives: [adapter.upgradeNg1Component('ng1')]
 })
 class Ng2Component {
+  fido: string = 'Fido';
   callCount: number = 0;
   clickButton = () => {
     setTimeout(() => {

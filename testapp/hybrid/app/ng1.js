@@ -11,7 +11,7 @@ System.register([], function(exports_1, context_1) {
     }
     function ng1() {
         return {
-            scope: {},
+            scope: { puppies: '@' },
             templateUrl: './html/ng1.html',
             controller: ctrl,
             controllerAs: 'ctrl'
