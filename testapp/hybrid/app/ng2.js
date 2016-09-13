@@ -23,12 +23,12 @@ var Ng2Component = (function () {
     Ng2Component = __decorate([
         core_1.Component({
             selector: 'ng2',
-            templateUrl: './html/ng2.html',
-            directives: [upgrader_1.adapter.upgradeNg1Component('ng1')]
+            templateUrl: './html/ng2.html'
         }), 
         __metadata('design:paramtypes', [])
     ], Ng2Component);
     return Ng2Component;
 }());
+exports.Ng2Component = Ng2Component;
 exports.ng2 = upgrader_1.adapter.downgradeNg2Component(Ng2Component);
 //# sourceMappingURL=ng2.js.map
