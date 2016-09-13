@@ -23,7 +23,6 @@ var Ng2Module = (function () {
             ],
             declarations: [
                 ng2_1.Ng2Component,
-                exports.adapter.upgradeNg1Component('ng1')
             ],
         }), 
         __metadata('design:paramtypes', [])

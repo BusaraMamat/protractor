@@ -11,4 +11,4 @@ ng1module.directive('myApp', myApp);
 ng1module.directive('ng2', ng2);
 ng1module.directive('ng1', ng1);
 
-adapter.bootstrap(document.body, ['hybridApp']);
+adapter.bootstrap(document.body, ['hybridApp'], {strictDi: true});
