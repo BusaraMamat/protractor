@@ -1,37 +1,49 @@
 describe('angularjs homepage', function() {
-  it('should greet the named user', function() {
-    browser.get('http://www.angularjs.org');
 
-    element(by.model('yourName')).sendKeys('Julie');
 
-    var greeting = element(by.binding('yourName'));
+  it('should submit', function() {
 
-    expect(greeting.getText()).toEqual('Hello Julie!');
+    browser.get('http://localhost:8081/ng1/#/form');
+
+    element(by.id('submit-trigger')).sendKeys('foo').sendKeys(protractor.Key.ENTER);
+    // element(by.id('submit-trigger')).submit();
+
+    expect(element(by.id('submit-flag')).getText()).toEqual('true');
+
   });
+  // it('should greet the named user', function() {
+  //   browser.get('http://www.angularjs.org');
 
-  describe('todo list', function() {
-    var todoList;
+  //   element(by.model('yourName')).sendKeys('Julie');
 
-    beforeEach(function() {
-      browser.get('http://www.angularjs.org');
+  //   var greeting = element(by.binding('yourName'));
 
-      todoList = element.all(by.repeater('todo in todoList.todos'));
-    });
+  //   expect(greeting.getText()).toEqual('Hello Julie!');
+  // });
 
-    it('should list todos', function() {
-      expect(todoList.count()).toEqual(2);
-      expect(todoList.get(1).getText()).toEqual('build an angular app');
-    });
+  // describe('todo list', function() {
+  //   var todoList;
 
-    it('should add a todo', function() {
-      var addTodo = element(by.model('todoList.todoText'));
-      var addButton = element(by.css('[value="add"]'));
+  //   beforeEach(function() {
+  //     browser.get('http://www.angularjs.org');
 
-      addTodo.sendKeys('write a protractor test');
-      addButton.click();
+  //     todoList = element.all(by.repeater('todo in todoList.todos'));
+  //   });
 
-      expect(todoList.count()).toEqual(3);
-      expect(todoList.get(2).getText()).toEqual('write a protractor test');
-    });
-  });
+  //   it('should list todos', function() {
+  //     expect(todoList.count()).toEqual(2);
+  //     expect(todoList.get(1).getText()).toEqual('build an angular app');
+  //   });
+
+  //   it('should add a todo', function() {
+  //     var addTodo = element(by.model('todoList.todoText'));
+  //     var addButton = element(by.css('[value="add"]'));
+
+  //     addTodo.sendKeys('write a protractor test');
+  //     addButton.click();
+
+  //     expect(todoList.count()).toEqual(3);
+  //     expect(todoList.get(2).getText()).toEqual('write a protractor test');
+  //   });
+  // });
 });

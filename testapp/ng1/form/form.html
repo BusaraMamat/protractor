@@ -1,6 +1,14 @@
 <p>Forms using different types of input</p>
 
 <div>
+  <h4>Submit</h4>
+  <form ng-submit="doSubmit()">
+    <input type="text" id="submit-trigger">
+    <div id="submit-flag">{{submitted}}</div>
+  </form>
+</div>
+
+<div>
   <h4>Bindings</h4>
   <span>{{greeting}}</span>
   <span data-ng-bind="username"></span>
