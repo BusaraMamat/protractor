@@ -72,7 +72,6 @@ export class ProtractorExpectedConditions {
    * Helper function that is equivalent to the logical_and if defaultRet==true,
    * or logical_or if defaultRet==false
    *
-   * @private
    * @param {boolean} defaultRet
    * @param {Array.<Function>} fns An array of expected conditions to chain.
    *

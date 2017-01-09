@@ -385,7 +385,6 @@ export class ElementArrayFinder extends WebdriverWebElement {
    * element.
    *
    * @returns {ElementFinder} An ElementFinder representation
-   * @private
    */
   toElementFinder_(): ElementFinder {
     return new ElementFinder(this.browser_, this);
@@ -455,7 +454,6 @@ export class ElementArrayFinder extends WebdriverWebElement {
    * @param {function(ElementFinder)} actionFn
    *
    * @returns {ElementArrayFinder}
-   * @private
    */
   // map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
   private applyAction_(actionFn: (value: WebElement, index: number, array: WebElement[]) => any):

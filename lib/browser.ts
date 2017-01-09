@@ -75,7 +75,6 @@ export class AbstractExtendedWebDriver extends AbstractWebDriver {
  * called in the context of the original object.  Any arguments of type
  * `ElementFinder` will be unwrapped to their underlying `WebElement` instance
  *
- * @private
  * @param {Object} to
  * @param {Object} from
  * @param {string} fnName
@@ -103,7 +102,6 @@ export interface ElementHelper extends Function {
 /**
  * Build the helper 'element' function for a given instance of Browser.
  *
- * @private
  * @param {Browser} browser A browser instance.
  * @returns {function(webdriver.Locator): ElementFinder}
  */
@@ -455,7 +453,6 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
    * The same as {@code webdriver.WebDriver.prototype.executeScript},
    * but with a customized description for debugging.
    *
-   * @private
    * @param {!(string|Function)} script The script to execute.
    * @param {string} description A description of the command for debugging.
    * @param {...*} var_args The arguments to pass to the script.
@@ -463,7 +460,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
    * the scripts return value.
    * @template T
    */
-  public executeScriptWithDescription(
+  public executeScriptWithDescription_(
       script: string|Function, description: string, ...scriptArgs: any[]): wdpromise.Promise<any> {
     if (typeof script === 'function') {
       script = 'return (' + script + ').apply(null, arguments);';
@@ -480,7 +477,6 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
    * The same as {@code webdriver.WebDriver.prototype.executeAsyncScript},
    * but with a customized description for debugging.
    *
-   * @private
    * @param {!(string|Function)} script The script to execute.
    * @param {string} description A description for debugging purposes.
    * @param {...*} var_args The arguments to pass to the script.
@@ -576,13 +572,13 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
                 }
                 let pendingTimeoutsPromise: wdpromise.Promise<any>;
                 if (this.trackOutstandingTimeouts_) {
-                  pendingTimeoutsPromise = this.executeScriptWithDescription(
+                  pendingTimeoutsPromise = this.executeScriptWithDescription_(
                       'return window.NG_PENDING_TIMEOUTS',
                       'Protractor.waitForAngular() - getting pending timeouts' + description);
                 } else {
                   pendingTimeoutsPromise = wdpromise.fulfilled({});
                 }
-                let pendingHttpsPromise = this.executeScriptWithDescription(
+                let pendingHttpsPromise = this.executeScriptWithDescription_(
                     clientSideScripts.getPendingHttpRequests,
                     'Protractor.waitForAngular() - getting pending https' + description,
                     this.rootEl);
@@ -714,8 +710,6 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
 
   /**
    * Add the base mock modules used for all Protractor tests.
-   *
-   * @private
    */
   private addBaseMockModules_() {
     this.addMockModule(
@@ -760,7 +754,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
     let deferred = wdpromise.defer<void>();
 
     this.driver.get(this.resetUrl).then(null, deferred.reject);
-    this.executeScriptWithDescription(
+    this.executeScriptWithDescription_(
             'window.name = "' + DEFER_LABEL + '" + window.name;' +
                 'window.location.replace("' + destination + '");',
             msg('reset url'))
@@ -772,7 +766,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
         .wait(
             () => {
               return this
-                  .executeScriptWithDescription('return window.location.href;', msg('get url'))
+                  .executeScriptWithDescription_('return window.location.href;', msg('get url'))
                   .then(
                       (url: any) => {
                         return url !== this.resetUrl;
@@ -828,7 +822,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
         for (const {name, script, args} of self.mockModules_) {
           moduleNames.push(name);
           let executeScriptArgs = [script, msg('add mock module ' + name), ...args];
-          self.executeScriptWithDescription.apply(self, executeScriptArgs)
+          self.executeScriptWithDescription_.apply(self, executeScriptArgs)
               .then(
                   null,
                   (err: Error) => {
@@ -838,7 +832,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
               .then(null, deferred.reject);
         }
 
-        self.executeScriptWithDescription(
+        self.executeScriptWithDescription_(
                 'window.__TESTABILITY__NG1_APP_ROOT_INJECTOR__ = ' +
                     'angular.resumeBootstrap(arguments[0]);',
                 msg('resume bootstrap'), moduleNames)
@@ -885,7 +879,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
     }
 
     return this
-        .executeScriptWithDescription(
+        .executeScriptWithDescription_(
             'return window.location.href', 'Protractor.refresh() - getUrl')
         .then((href: string) => {
           return this.get(href, opt_timeout);
@@ -918,7 +912,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
   setLocation(url: string): wdpromise.Promise<any> {
     this.waitForAngular();
     return this
-        .executeScriptWithDescription(
+        .executeScriptWithDescription_(
             clientSideScripts.setLocation, 'Protractor.setLocation()', this.rootEl, url)
         .then((browserErr: Error) => {
           if (browserErr) {
@@ -939,7 +933,7 @@ export class ProtractorBrowser extends AbstractExtendedWebDriver {
    */
   getLocationAbsUrl(): wdpromise.Promise<any> {
     this.waitForAngular();
-    return this.executeScriptWithDescription(
+    return this.executeScriptWithDescription_(
         clientSideScripts.getLocationAbsUrl, 'Protractor.getLocationAbsUrl()', this.rootEl);
   }
 
